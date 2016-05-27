@@ -36,9 +36,12 @@ angular.module('app').controller('index', ['$scope', '$http', function($scope, $
     $http.get('/sensor').success(function(data){
       if(!data.error){
       	data.data.forEach(function(sensor){
-      		socket.emit('rawdata', sensor.name);
       		if(sensor.chart){
-      			socket.emit('rawdata-chart', sensor.name);
+      			socket.emit('rawdata-chart-history', {
+              start: $scope.date.start,
+              end: $scope.date.end,
+              sensor: sensor.name
+            });
       		}
       		$scope.sensors[sensor.name] = {};
       		$scope.sensors[sensor.name].description = sensor.description;

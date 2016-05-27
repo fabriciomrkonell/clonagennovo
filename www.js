@@ -77,15 +77,6 @@ io.on('connection', function(socket) {
   });
   socket.on('rawdata-chart', function(name) {
     io.sockets.emit('news-rawdata-chart', { name: name, data: [] });
-    RawData.find({
-      name: name
-    }).sort([['created_at', 'desc']]).exec(function(err, data){
-      var exit = [];
-      data.forEach(function(item){
-        exit.push(parseFloat(item.datavalue) || 0);
-      });
-      io.sockets.emit('news-rawdata-chart-history', { name: name, data: exit });
-    });
   });
   socket.on('rawdata-chart-history', function(obj) {
     RawData.find({

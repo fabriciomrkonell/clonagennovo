@@ -51,32 +51,33 @@ angular.module('app').controller('index', ['$scope', '$http', function($scope, $
   });
 
   socket.on('news-rawdata-chart', function(data){
-  	$('#container' + data.name).highcharts({
-      title: {
-        text: ''
-      },
-      xAxis: {
-      	labels: {
-      		enabled: false
-				}
-      },
-      yAxis: {
-       	title: {
+    if($('#container' + data.name).highcharts() === undefined){
+      $('#container' + data.name).highcharts({
+        title: {
           text: ''
-        }
-      },
-      tooltip: {
-      	formatter: function() {
-        	return this.series.name + ': <b>' + this.y + '</b>';
-      	}
-      },
-      series: [{
-        showInLegend: false,
-        name: $scope.sensors[data.name].description,
-        data: data.data
-      }]
-  	});
-
+        },
+        xAxis: {
+          labels: {
+            enabled: false
+          }
+        },
+        yAxis: {
+          title: {
+            text: ''
+          }
+        },
+        tooltip: {
+          formatter: function() {
+            return this.series.name + ': <b>' + this.y + '</b>';
+          }
+        },
+        series: [{
+          showInLegend: false,
+          name: $scope.sensors[data.name].description,
+          data: data.data
+        }]
+      });
+    }
   });
 
 }])
