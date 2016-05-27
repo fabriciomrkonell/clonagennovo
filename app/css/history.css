@@ -1,0 +1,17 @@
+.ng-cloak{
+	display: none;
+}
+
+.title{
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+
+.panel-body-filter{
+	padding: 15px 15px 5px 15px;
+}
+
+.form-group-button{
+	margin-top: 25px;
+}

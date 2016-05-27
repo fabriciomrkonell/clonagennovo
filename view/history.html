@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Clonagen - Histórico</title>
+		<link rel="stylesheet" type="text/css" href="/app/vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/app/css/history.css">
+	</head>
+	<body class="ng-cloak" ng-controller="index">
+		<div class="container">
+			<div class="row">
+				<div class="title">
+					Clonagen - Histórico
+				</div>
+				<div class="col-sm-12">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Filtros</h3>
+					  </div>
+					  <div class="panel-body panel-body-filter">
+					  	<div class="col-sm-4">
+					  		<div class="form-group">
+							    <label>Data início</label>
+							    <input type="text" class="form-control" placeholder="Data início" restrict="reject" clean="true" mask="39/19/9999" ng-model="date.start">
+							  </div>
+					  	</div>
+					  	<div class="col-sm-4">
+					  		<div class="form-group">
+							    <label>Data fim</label>
+							    <input type="text" class="form-control" placeholder="Data fim" restrict="reject" clean="true" mask="39/19/9999" ng-model="date.end">
+							  </div>
+					  	</div>
+					  	<div class="col-sm-4">
+					  		<div class="form-group form-group-button">
+					  			<button type="button" class="btn btn-success" ng-click="searchData()">Pesquisar</button>
+							  </div>
+					  	</div>
+					  </div>
+					</div>
+				</div>
+				<div class="col-sm-6" ng-repeat="(key, sensor) in sensors" ng-if="sensor.chart">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">{{sensor.description}}</h3>
+					  </div>
+					  <div class="panel-body">
+					  	<div id="container{{sensor.name}}" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/app/vendor/jquery/jquery.js"></script>
+		<script src="/app/vendor/highcharts/highcharts.min.js"></script>
+		<script src="/app/vendor/angular/angular.min.js"></script>
+		<script src="/app/vendor/angular/angular-mask.min.js"></script>
+		<script src="/app/js/history.js"></script>
+	</body>
+</html>

@@ -11,4 +11,8 @@ router.get('/configuration', function(req, res, next) {
  res.sendfile('./view/configuration.html');
 });
 
+router.get('/history', function(req, res, next) {
+ res.sendfile('./view/history.html');
+});
+
 module.exports = router;

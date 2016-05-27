@@ -53,6 +53,18 @@ function persit(name, datavalue){
   });
 }
 
+function getYear(date){
+  return date.substr(4,4);
+}
+
+function getMonth(date){
+  return date.substr(2,2);
+}
+
+function getDay(date){
+  return date.substr(0,2);
+}
+
 io.on('connection', function(socket) {
   socket.on('rawdata', function(name) {
     RawData.findOne({
@@ -64,6 +76,7 @@ io.on('connection', function(socket) {
     });
   });
   socket.on('rawdata-chart', function(name) {
+    io.sockets.emit('news-rawdata-chart', { name: name, data: [] });
     RawData.find({
       name: name
     }).sort([['created_at', 'desc']]).exec(function(err, data){
@@ -71,7 +84,22 @@ io.on('connection', function(socket) {
       data.forEach(function(item){
         exit.push(parseFloat(item.datavalue) || 0);
       });
-      io.sockets.emit('news-rawdata-chart', { name: name, data: exit });
+      io.sockets.emit('news-rawdata-chart-history', { name: name, data: exit });
+    });
+  });
+  socket.on('rawdata-chart-history', function(obj) {
+    RawData.find({
+      name: obj.sensor,
+      created_at: {
+        $gte: new Date(getYear(obj.start), getMonth(obj.start), getDay(obj.start)),
+        $lt: new Date(getYear(obj.end), getMonth(obj.start), getDay(obj.start))
+      }
+    }).sort([['created_at', 'desc']]).exec(function(err, data){
+      var exit = [];
+      data.forEach(function(item){
+        exit.push(parseFloat(item.datavalue) || 0);
+      });
+      io.sockets.emit('news-rawdata-chart-history', { name: obj.sensor, data: exit });
     });
   });
 });
