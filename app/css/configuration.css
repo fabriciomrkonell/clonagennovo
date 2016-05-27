@@ -1,0 +1,13 @@
+.ng-cloak{
+  display: none;
+}
+
+.title{
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+
+.th-actions{
+  width: 90px;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Clonagen - Configuração</title>
+		<link rel="stylesheet" type="text/css" href="/app/vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/app/css/configuration.css">
+	</head>
+	<body class="ng-cloak" ng-controller="configuration">
+		<div class="container">
+			<div class="row">
+				<div class="title">
+					Clonagen - Configurações
+				</div>
+				<div class="col-sm-12">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Cadastro de Sensores</h3>
+					  </div>
+					  <div class="panel-body">
+					  	<div class="col-sm-4">
+					  		<form>
+					  			<div class="form-group">
+								    <label>Descrição</label>
+								    <input type="text" class="form-control" placeholder="Descrição" ng-model='data.description'>
+								  </div>
+								  <div class="form-group">
+								    <label>Nome da Variável</label>
+								    <input type="text" class="form-control" placeholder="Nome da Variável" ng-model='data.name'>
+								  </div>
+								  <div class="form-group">
+								    <label>Unidade</label>
+								    <input type="text" class="form-control" placeholder="Unidade" ng-model='data.unit'>
+								  </div>
+								  <div class="checkbox">
+								    <label>
+								      <input type="checkbox" ng-model="data.chart">Gráfico
+								    </label>
+								  </div>
+								  <button type="button" class="btn btn-success" ng-click="persist(data)">Salvar</button>
+								  <button type="button" class="btn btn-default" ng-click="clear()">Cancelar</button>
+								</form>
+					  	</div>
+					  	<div class="col-sm-8">
+					  		<table class="table table-bordered table-condensed">
+					  			<thead>
+					  				<tr>
+					  					<th>Descrição</th>
+					  					<th>Variável</th>
+					  					<th class="text-center th-actions">Ações</th>
+					  				</tr>
+					  			</thead>
+					  			<tbody>
+					  				<tr ng-repeat='sensor in sensors'>
+					  					<td>{{sensor.description}}</td>
+					  					<td>{{sensor.name}}</td>
+					  					<td class="text-center th-actions">
+					  						<button type="button" class="btn btn-primary btn-xs" ng-click="edit(sensor)">
+					  							<i class="glyphicon glyphicon-pencil"></i>
+					  						</button>
+					  						<button type="button" class="btn btn-danger btn-xs" ng-click="delete(sensor)">
+					  							<i class="glyphicon glyphicon-remove"></i>
+					  						</button>
+					  					</td>
+					  				</tr>
+					  			</tbody>
+					  		</table>
+					  	</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/app/vendor/angular/angular.min.js"></script>
+		<script src="/app/js/configuration.js"></script>
+	</body>
+</html>

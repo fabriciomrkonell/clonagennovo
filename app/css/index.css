@@ -1,0 +1,23 @@
+.ng-cloak{
+	display: none;
+}
+
+.title{
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+
+.info-sensor{
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	margin-top: 15px;
+}
+
+.panel-body-sensors{
+	padding: 0px 15px 15px 15px;
+}
+
+.info-sensor span{
+	font-size: 20px;
+}
